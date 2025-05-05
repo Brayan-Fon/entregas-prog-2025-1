@@ -1,0 +1,95 @@
+#Título de práctica: Macotas1
+
+#Este código implementa una calculadora de matrices 2x2 en consola. Permite al usuario ingresar dos matrices, elegir una operación (suma, resta o multiplicación) y luego muestra el resultado.
+
+#Autor: Brayan Fontecha
+#Fecha 04-05-2025
+
+# Definimos una clase llamada Matriz para representar una matriz 2x2
+class Matriz:
+    def __init__(self, elementos):
+        # Guardamos los elementos como una lista de listas (2x2)
+        self.m = elementos
+
+    # Sobrecarga del operador + para sumar dos matrices
+    def __add__(self, otra):
+        return Matriz([
+            [self.m[0][0] + otra.m[0][0], self.m[0][1] + otra.m[0][1]],
+            [self.m[1][0] + otra.m[1][0], self.m[1][1] + otra.m[1][1]]
+        ])
+
+    # Sobrecarga del operador - para restar dos matrices
+    def __sub__(self, otra):
+        return Matriz([
+            [self.m[0][0] - otra.m[0][0], self.m[0][1] - otra.m[0][1]],
+            [self.m[1][0] - otra.m[1][0], self.m[1][1] - otra.m[1][1]]
+        ])
+
+    # Sobrecarga del operador @ para multiplicación de matrices
+    def __matmul__(self, otra):
+        # Multiplicación estándar de matrices 2x2
+        return Matriz([
+            [
+                self.m[0][0]*otra.m[0][0] + self.m[0][1]*otra.m[1][0],
+                self.m[0][0]*otra.m[0][1] + self.m[0][1]*otra.m[1][1]
+            ],
+            [
+                self.m[1][0]*otra.m[0][0] + self.m[1][1]*otra.m[1][0],
+                self.m[1][0]*otra.m[0][1] + self.m[1][1]*otra.m[1][1]
+            ]
+        ])
+
+    # Método para mostrar la matriz como texto formateado
+    def __str__(self):
+        return f"|{self.m[0][0]:<3} {self.m[0][1]:<3}|\n|{self.m[1][0]:<3} {self.m[1][1]:<3}|"
+
+# Función para pedir los valores de una matriz al usuario
+def pedir_matriz(num):
+    print(f"Ingrese los valores de la Matriz {num}:")
+    elementos = []
+    for i in range(2):
+        fila = []
+        for j in range(2):
+            # Pedimos al usuario cada elemento por separado
+            valor = int(input(f"> Matriz {num}: elemento {i},{j}\n< "))
+            fila.append(valor)
+        elementos.append(fila)  # Agregamos la fila a la matriz
+    return Matriz(elementos)  # Devolvemos la matriz como objeto
+
+# Función principal del programa
+def main():
+    # Solicitamos al usuario que ingrese las dos matrices
+    matriz1 = pedir_matriz(1)
+    matriz2 = pedir_matriz(2)
+
+    # Mostramos las matrices ingresadas
+    print("> Matriz 1:")
+    print(matriz1)
+    print("> Matriz 2:")
+    print(matriz2)
+
+    # Mostramos el menú de operaciones
+    print("> Escriba 1 para suma,\n          2 para resta,\n          3 para multiplicación")
+    opcion = input("< ")  # Leemos la opción del usuario
+
+    # Realizamos la operación seleccionada
+    if opcion == '1':
+        resultado = matriz1 + matriz2
+        print("> La suma de las dos matrices es:")
+    elif opcion == '2':
+        resultado = matriz1 - matriz2
+        print("> La resta de las dos matrices es:")
+    elif opcion == '3':
+        resultado = matriz1 @ matriz2
+        print("> La multiplicación de las dos matrices es:")
+    else:
+        # Si la opción no es válida, mostramos un mensaje de error
+        print("> Opción inválida")
+        return
+
+    # Mostramos el resultado de la operación
+    print(resultado)
+
+# Punto de entrada del programa
+if __name__ == "__main__":
+    main()
