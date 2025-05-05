@@ -1,4 +1,4 @@
-#Título de práctica: Macotas1
+#Título de práctica: CalcMat
 
 #Este código implementa una calculadora de matrices 2x2 en consola. Permite al usuario ingresar dos matrices, elegir una operación (suma, resta o multiplicación) y luego muestra el resultado.
 
