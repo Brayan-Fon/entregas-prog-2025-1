@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import tkinter as tk
-from Saludo_GUI import VentanaSaludo  # Asegúrate de que el nombre coincida con el nuevo de la clase
+from Saludo_GUI import VentanaSaludo  
 
 class TestVentanaSaludo(unittest.TestCase):
     def setUp(self):
